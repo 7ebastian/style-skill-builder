@@ -31,12 +31,24 @@ This is a skill repository, not a plugin. The skill lives at `skills/style-skill
 Give your agent this one-liner:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/7ebastian/style-skill-builder/main/install.sh | bash
+npx skills add 7ebastian/style-skill-builder -g
 ```
 
-It installs the skill to `~/.agents/skills/style-skill-builder` and symlinks it into `~/.codex/skills` and `~/.claude/skills`.
+That installs the skill globally for the current agent runtime.
 
-Restart Codex or Claude, or open a new thread, so the skill list refreshes.
+To install explicitly for both Codex and Claude Code:
+
+```bash
+npx skills add 7ebastian/style-skill-builder -g -a codex -a claude-code -y
+```
+
+Restart Codex or Claude Code, or open a new thread, so the skill list refreshes.
+
+To update later:
+
+```bash
+npx skills update style-skill-builder -g
+```
 
 ### Claude.ai Or Other Skill Uploaders
 

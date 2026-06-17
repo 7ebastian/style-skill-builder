@@ -36,13 +36,9 @@ npx skills add 7ebastian/style-skill-builder -g
 
 That installs the skill globally for the current agent runtime.
 
-To install explicitly for both Codex and Claude Code:
+The Skills CLI can install from GitHub directly and will target the agent you choose or detect.
 
-```bash
-npx skills add 7ebastian/style-skill-builder -g -a codex -a claude-code -y
-```
-
-Restart Codex or Claude Code, or open a new thread, so the skill list refreshes.
+Restart your agent, or open a new thread, so the skill list refreshes.
 
 To update later:
 

@@ -91,6 +91,9 @@ For reviews, lead with the highest-impact issues and concrete fixes.
 def build_revision_checklist(style_guide: str) -> str:
     if "## 8. Revision Checklist" in style_guide:
         checklist = style_guide.split("## 8. Revision Checklist", 1)[1].strip()
+        next_section = re.search(r"\n##\s+", checklist)
+        if next_section:
+            checklist = checklist[: next_section.start()].strip()
         if checklist:
             return "# Revision Checklist\n\n" + checklist
     return """# Revision Checklist

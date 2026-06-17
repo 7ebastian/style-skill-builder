@@ -1,30 +1,21 @@
 # Style Skill Builder
 
-Style Skill Builder is an agent skill for turning writing samples, editorial guides, comments, interviews, and public references into reusable writing style skills.
+Style Skill Builder is a single agent skill for turning writing samples, editorial guides, comments, interviews, and public references into reusable writing style skills.
 
 It helps an agent:
 
 - analyze writing samples with a richer craft framework
 - extract a neutral style guide without importing another brand's voice
 - package that guide as a Codex or Claude skill
-- add pass/fail evals and memory so the generated skill can improve over time
-- optionally scaffold Mailchimp-style content-system modules for channels, web/UI copy, accessibility, translation, legal constraints, and word lists
+- add pass/fail evals and memory so generated skills can improve over time
+- scaffold content-system modules for channels, web/UI copy, accessibility, translation, legal constraints, and word lists
 
-This repository is packaged in the same broad shape as public Agent Skills repositories: each skill is self-contained under `skills/<skill-name>/` with a `SKILL.md` file and optional references, scripts, and agent metadata.
-
-## Included Skill
-
-- `style-skill-builder`: Extract a writing style from source material, author a neutral style guide, and codify it into a reusable skill.
+This is a skill repository, not a plugin. The skill lives at `skills/style-skill-builder/`.
 
 ## Repository Structure
 
 ```text
 .
-+-- .claude-plugin/
-|   +-- marketplace.json
-|   +-- plugin.json
-+-- .codex-plugin/
-|   +-- plugin.json
 +-- skills/
 |   +-- style-skill-builder/
 |       +-- SKILL.md
@@ -37,40 +28,7 @@ This repository is packaged in the same broad shape as public Agent Skills repos
 
 ## Install
 
-### Claude Code
-
-Run these commands inside Claude Code:
-
-```text
-/plugin marketplace add 7ebastian/style-skill-builder
-/plugin install style-skill-builder@style-skill-builder-local
-```
-
-Restart Claude Code after installation.
-
-You can then invoke the skill directly:
-
-```text
-/style-skill-builder
-```
-
-Or ask for it naturally:
-
-```text
-Use the style skill builder to extract a writing style from these samples and package it as a reusable skill.
-```
-
 ### Codex
-
-Register the marketplace:
-
-```bash
-codex plugin marketplace add 7ebastian/style-skill-builder
-```
-
-Then launch Codex, run `/plugins`, open the Style Skill Builder marketplace, and install `style-skill-builder`. Restart Codex after installation.
-
-If your Codex setup uses skills directly instead of plugin marketplaces, install the skill folder into your Codex skills directory:
 
 ```bash
 git clone https://github.com/7ebastian/style-skill-builder.git
@@ -78,7 +36,19 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R style-skill-builder/skills/style-skill-builder "${CODEX_HOME:-$HOME/.codex}/skills/style-skill-builder"
 ```
 
-In shared multi-agent setups, you can also place the skill in `~/.agents/skills/style-skill-builder` and symlink it into other runtimes.
+Restart Codex or open a new thread so the skill list refreshes.
+
+### Shared Codex And Claude Setup
+
+Use `~/.agents/skills` as the canonical location, then symlink into each runtime:
+
+```bash
+git clone https://github.com/7ebastian/style-skill-builder.git
+mkdir -p "$HOME/.agents/skills" "$HOME/.codex/skills" "$HOME/.claude/skills"
+cp -R style-skill-builder/skills/style-skill-builder "$HOME/.agents/skills/style-skill-builder"
+ln -s "$HOME/.agents/skills/style-skill-builder" "$HOME/.codex/skills/style-skill-builder"
+ln -s "$HOME/.agents/skills/style-skill-builder" "$HOME/.claude/skills/style-skill-builder"
+```
 
 ### Claude.ai Or Other Skill Uploaders
 
@@ -105,11 +75,19 @@ Use $style-skill-builder to turn this brand guide into a reusable writing skill 
 Use $style-skill-builder to create a full content-system skill with channel rules, accessibility, translation, legal constraints, and a word list.
 ```
 
-The generated style skill can be minimal or operationally complete. For full content-system scaffolding, use the included script:
+The generated style skill can be minimal or operationally complete. Generated style skills use the short `sg-` prefix so multiple guides group together in autocomplete:
+
+- `sg-noah`
+- `sg-mailchimp`
+- `sg-haavn`
+
+For full content-system scaffolding, use the included script:
 
 ```bash
-skills/style-skill-builder/scripts/scaffold_style_skill.py my-writing-style --modules all
+skills/style-skill-builder/scripts/scaffold_style_skill.py noah --modules all
 ```
+
+That creates `sg-noah` by default.
 
 Supported optional modules:
 

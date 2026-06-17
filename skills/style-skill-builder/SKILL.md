@@ -49,7 +49,8 @@ Use source guides like Mailchimp as architecture inspiration only. Do not copy t
    - Revision checklist
 
 5. Package the guide as a skill when requested.
-   - Name the skill in lowercase kebab-case.
+   - Name generated style skills with the `sg-<short-name>` pattern so multiple guides cluster in autocomplete, for example `sg-noah`, `sg-mailchimp`, or `sg-haavn`.
+   - Keep the `sg-` prefix for reusable writing-style skills unless the user explicitly asks for a different established namespace.
    - Keep `SKILL.md` short and procedural.
    - Put the full style guide and review checklists in `references/`.
    - Add `agents/openai.yaml`.
@@ -82,7 +83,7 @@ When generating a style skill, make it usable for drafting, revising, reviewing,
 - Channel rules only when the sources support them.
 - Operational modules for accessibility, translation, legal, web/UI microcopy, word lists, or channel guidance only when the use case needs a full content system.
 
-Run `scripts/scaffold_style_skill.py` when a deterministic starter folder would save time. Read or patch the generated files before considering the skill finished.
+Run `scripts/scaffold_style_skill.py` when a deterministic starter folder would save time. It automatically applies the `sg-` naming prefix unless the requested name already has it. Read or patch the generated files before considering the skill finished.
 
 ## Output Shapes
 

@@ -17,6 +17,8 @@ VALID_MODULES = {
     "word-list",
 }
 
+STANDARD_PREFIX = "sg-"
+
 
 def normalize_skill_name(value: str) -> str:
     name = re.sub(r"[^a-z0-9]+", "-", value.strip().lower()).strip("-")
@@ -25,6 +27,21 @@ def normalize_skill_name(value: str) -> str:
         raise ValueError("skill name must contain at least one letter or digit")
     if len(name) > 64:
         raise ValueError("skill name must be 64 characters or fewer")
+    return name
+
+
+def ensure_standard_prefix(name: str) -> str:
+    if name.startswith(STANDARD_PREFIX):
+        return name
+    prefixed = f"{STANDARD_PREFIX}{name}"
+    if len(prefixed) > 64:
+        raise ValueError(f"skill name with '{STANDARD_PREFIX}' prefix must be 64 characters or fewer")
+    return prefixed
+
+
+def strip_standard_prefix(name: str) -> str:
+    if name.startswith(STANDARD_PREFIX):
+        return name[len(STANDARD_PREFIX) :]
     return name
 
 
@@ -252,7 +269,10 @@ Add rules only for surfaces this skill will actually write.
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("skill_name", help="Skill name or title. Normalized to kebab-case.")
+    parser.add_argument(
+        "skill_name",
+        help="Skill name or title. Normalized to kebab-case and prefixed with sg- unless already prefixed.",
+    )
     parser.add_argument("--output-dir", default="/Users/Work/.agents/skills", help="Directory that will contain the skill folder.")
     parser.add_argument("--style-name", help="Human-facing style name. Defaults to title-cased skill name.")
     parser.add_argument("--style-guide", help="Path to a completed style guide markdown file.")
@@ -263,8 +283,9 @@ def main() -> None:
     parser.add_argument("--force", action="store_true", help="Overwrite existing files in the target skill folder.")
     args = parser.parse_args()
 
-    skill_name = normalize_skill_name(args.skill_name)
-    style_name = args.style_name or title_from_name(skill_name)
+    normalized_name = normalize_skill_name(args.skill_name)
+    skill_name = ensure_standard_prefix(normalized_name)
+    style_name = args.style_name or title_from_name(strip_standard_prefix(skill_name))
     modules = parse_modules(args.modules)
     target = Path(args.output_dir).expanduser() / skill_name
     style_guide = read_optional(args.style_guide) or "# Style Guide\n\n## 0. Purpose and Principles\n\n[Add the purpose and source-backed principles here.]\n\n## 1. Voice and Tone\n\n[Add the completed guide here.]"

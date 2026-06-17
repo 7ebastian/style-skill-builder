@@ -5,7 +5,7 @@ Use this when turning a completed style guide into a reusable skill.
 ## Folder Shape
 
 ```text
-<skill-name>/
+sg-<short-name>/
 +-- SKILL.md
 +-- agents/
 |   +-- openai.yaml
@@ -21,11 +21,23 @@ Use this when turning a completed style guide into a reusable skill.
 
 Add `references/evals.md` and `references/memory.md` when the skill should improve over repeated use. Add operational modules such as `references/channel-rules.md`, `references/word-list.md`, `references/legal-and-accessibility.md`, `references/translation.md`, or `references/web-elements.md` only when the source material supports them or the user asks for a full content system.
 
+## Naming
+
+Use `sg-<short-name>` for generated style skills. This keeps style guides grouped in Codex and Claude autocomplete, similar to plugin-style prefixes such as `ce-` or `hv-`, without wasting name space.
+
+Examples:
+
+- `sg-noah`
+- `sg-mailchimp`
+- `sg-founder`
+
+Use lowercase letters, digits, and hyphens only. Keep the folder name and frontmatter `name` identical.
+
 ## SKILL.md Skeleton
 
 ```markdown
 ---
-name: <skill-name>
+name: sg-<short-name>
 description: Draft, revise, review, and adapt writing in <style-name>. Use when the user asks for <brand/person/team/publication> voice, <style-name> writing, style-consistent edits, draft review, line editing, channel adaptation, or applying the attached style guide to articles, posts, emails, docs, scripts, or other prose.
 ---
 
@@ -89,17 +101,17 @@ Use:
 interface:
   display_name: "<Human Name>"
   short_description: "<25 to 64 character skill description>"
-  default_prompt: "Use $<skill-name> to revise this draft in the <style-name> style."
+  default_prompt: "Use $sg-<short-name> to revise this draft in the <style-name> style."
 ```
 
-Quote string values. The default prompt must mention the skill with `$<skill-name>`.
+Quote string values. The default prompt must mention the skill with `$sg-<short-name>`.
 
 ## Installation
 
-Prefer `/Users/Work/.agents/skills/<skill-name>` as the canonical location. For Claude compatibility, create a symlink:
+Prefer `/Users/Work/.agents/skills/sg-<short-name>` as the canonical location. For Claude compatibility, create a symlink:
 
 ```bash
-ln -s /Users/Work/.agents/skills/<skill-name> /Users/Work/.claude/skills/<skill-name>
+ln -s /Users/Work/.agents/skills/sg-<short-name> /Users/Work/.claude/skills/sg-<short-name>
 ```
 
 Validate after creation or update.

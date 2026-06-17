@@ -28,35 +28,22 @@ This is a skill repository, not a plugin. The skill lives at `skills/style-skill
 
 ## Install
 
-### Codex
+Give your agent this one-liner:
 
 ```bash
-git clone https://github.com/7ebastian/style-skill-builder.git
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
-cp -R style-skill-builder/skills/style-skill-builder "${CODEX_HOME:-$HOME/.codex}/skills/style-skill-builder"
+curl -fsSL https://raw.githubusercontent.com/7ebastian/style-skill-builder/main/install.sh | bash
 ```
 
-Restart Codex or open a new thread so the skill list refreshes.
+It installs the skill to `~/.agents/skills/style-skill-builder` and symlinks it into `~/.codex/skills` and `~/.claude/skills`.
 
-### Shared Codex And Claude Setup
-
-Use `~/.agents/skills` as the canonical location, then symlink into each runtime:
-
-```bash
-git clone https://github.com/7ebastian/style-skill-builder.git
-mkdir -p "$HOME/.agents/skills" "$HOME/.codex/skills" "$HOME/.claude/skills"
-cp -R style-skill-builder/skills/style-skill-builder "$HOME/.agents/skills/style-skill-builder"
-ln -s "$HOME/.agents/skills/style-skill-builder" "$HOME/.codex/skills/style-skill-builder"
-ln -s "$HOME/.agents/skills/style-skill-builder" "$HOME/.claude/skills/style-skill-builder"
-```
+Restart Codex or Claude, or open a new thread, so the skill list refreshes.
 
 ### Claude.ai Or Other Skill Uploaders
 
-Zip the skill folder and upload it as a custom skill:
+For upload-only products, zip the skill folder:
 
 ```bash
-cd style-skill-builder/skills
-zip -r style-skill-builder.zip style-skill-builder
+git clone --depth 1 https://github.com/7ebastian/style-skill-builder.git && cd style-skill-builder/skills && zip -r style-skill-builder.zip style-skill-builder
 ```
 
 ## Use

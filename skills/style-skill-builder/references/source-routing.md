@@ -47,6 +47,22 @@ Extract patterns, not large passages. Use short excerpts only when needed as evi
 
 Do not paste a full article, guide, chapter, or style section into the generated output.
 
+## Web Source Extraction
+
+When extracting from websites, especially blogs, newsletters, and Substack pages, avoid broad body dumps. Pages often include subscription boxes, paywall prompts, recommendations, comments, and footer text that can overwhelm the actual article.
+
+Prefer bounded fields:
+
+- page URL
+- title and subtitle or meta description
+- author and date when available
+- headings
+- short paragraph openings
+- external source links and their anchor text
+- visible paywall or access limits
+
+Filter out subscription prompts, sign-in prompts, privacy or terms footers, comments, and repeated navigation unless the user's task specifically concerns those elements.
+
 ## Evidence Labels
 
 Use these labels in notes or guide drafts when helpful:

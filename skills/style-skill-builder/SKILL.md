@@ -86,7 +86,7 @@ Run `scripts/scaffold_style_skill.py` when a deterministic starter folder would 
 
 ## Output Shapes
 
-For guide-only work, return the 8-section guide plus a short source confidence note.
+For guide-only work, return the neutral guide plus a short source confidence note.
 
 For skill-building work, create or update files, validate them, then report:
 

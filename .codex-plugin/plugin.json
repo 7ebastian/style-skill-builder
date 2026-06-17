@@ -1,0 +1,36 @@
+{
+  "name": "style-skill-builder",
+  "version": "0.1.0",
+  "description": "Build reusable writing style skills from source material.",
+  "author": {
+    "name": "Sebastian"
+  },
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "editing",
+    "style-guide",
+    "skills",
+    "evals"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Style Skill Builder",
+    "shortDescription": "Build reusable writing style skills",
+    "longDescription": "Style Skill Builder extracts writing style from samples, guides, comments, and interviews, then packages the result as a reusable writing skill with neutral style-guide scaffolding, evals, memory, and optional content-system modules.",
+    "developerName": "Sebastian",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Extract a writing style from these samples and turn it into a reusable skill.",
+      "Build a style guide skill with evals and memory from this source material.",
+      "Create a full content-system writing skill with optional operational modules."
+    ],
+    "brandColor": "#2563EB",
+    "screenshots": []
+  }
+}

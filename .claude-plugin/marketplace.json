@@ -1,0 +1,31 @@
+{
+  "name": "style-skill-builder-local",
+  "owner": {
+    "name": "Sebastian"
+  },
+  "metadata": {
+    "description": "Build reusable writing style skills from source material.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "style-skill-builder",
+      "description": "Extract writing style from source material, author a neutral style guide, and package it as a reusable Codex or Claude skill with evals, memory, and optional content-system modules.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Sebastian"
+      },
+      "tags": [
+        "writing",
+        "editing",
+        "style-guide",
+        "skills"
+      ],
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/style-skill-builder"
+      ]
+    }
+  ]
+}

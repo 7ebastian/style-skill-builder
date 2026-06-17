@@ -1,0 +1,4 @@
+interface:
+  display_name: "Style Skill Builder"
+  short_description: "Build reusable writing style skills"
+  default_prompt: "Use $style-skill-builder to extract style from these samples and package it as a reusable writing skill."
